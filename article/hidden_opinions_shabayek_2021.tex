@@ -100,7 +100,7 @@ The $expression$ $heuristic$ departs from early models of opinion formation, suc
 
 \bigskip
 
-Formally, I develop a model where a set of individuals are connected through an undirected network and exchange opinions about a given issue over a large number of periods. Each individual is exogenously allocated an initial opinion in a bounded interval, which represents their initial stance or attitude concerning the issue to be discussed. The influence of each individual is summarized by a given real valued centrality measure.\footnote{In section \ref{simulations} I define a centrality measure, which I call $local$ $popularity$, and motivate its use.} As mentioned, there are two types of individuals: individuals who $hide$ and individuals $express$ their opinion. If the influence of an individual is below a given threshold (hereafter \textit{expression-threshold}), then they choose to $hide$ and update their opinions \`{a} la DeGroot. Otherwise, individuals choose to $express$ (hereafter $expresser$) and update their opinions according to a law of motion, which could incorporate either assimilation of opinions or distancing. At a given period, two directly connected expressers can either be like-minded or ideologically-opposed depending on the difference of their respective viewpoints. In particular, expressers only interact with peers who also choose to express. To be more precise, individuals who express undergo an attractive effect (positive influence or assimilation) when interacting at a given period with like-minded peers who also choose to express. But when they interact with expressing peers that are ideologically-opposed, they undergo a repulsive effect (negative influence or distancing) and push each other to the upper and lower bound of the opinion interval. Intuitively, expression allows for a debate or a discussion to take place. This discussion could lead to agreement or can escalate to conflict. 
+Formally, I develop a model where a set of individuals are connected through an undirected network and exchange opinions about a given issue over a large number of periods. Each individual is exogenously allocated an initial opinion in a bounded interval, which represents their initial stance or attitude concerning the issue to be discussed. The influence of each individual is summarized by a given real valued centrality measure.\footnote{In section \ref{simulations} I define a centrality measure, which I call $local$ $popularity$, and motivate its use.} As mentioned, there are two types of individuals: individuals who $hide$ and individuals $express$ their opinion. If the influence of an individual is below a given threshold (hereafter \textit{expression-threshold}), then they $hide$ their opinion and update their opinions \`{a} la DeGroot. Otherwise, individuals $express$ (hereafter $expresser$) and update their opinions according to a law of motion, which could incorporate either assimilation of opinions or distancing. At a given period, two directly connected expressers can either be like-minded or ideologically-opposed depending on the difference of their respective viewpoints. In particular, expressers only interact with peers who also choose to express. To be more precise, individuals who express undergo an attractive effect (positive influence or assimilation) when interacting at a given period with like-minded peers who also choose to express. But when they interact with expressing peers that are ideologically-opposed, they undergo a repulsive effect (negative influence or distancing) and push each other to the upper and lower bound of the opinion interval. Intuitively, expression allows for a debate or a discussion to take place. This discussion could lead to agreement or can escalate to conflict. 
 %Two directly connected expressers are like-minded at a given period if the difference of their respective viewpoints is small enough, otherwise they are ideologically-opposed.
 \bigskip
 %The position of each individual in the network determines their local popularity, which is defined as the degree of an individual divided by the average degree of friends.
@@ -111,7 +111,7 @@ I provide a novel unifying framework that explains how different opinion pattern
 
 \bigskip
 
-When an expresser has no neighbors who also choose to express, this individual remains stubborn and their long-run opinion corresponds to their initial opinion. Furthermore, expressers can have neighbors who are locally popular and choose to express. For instance, consider three expressers $1$, $2$ and $3$. Individual $1$ has a direct link to $2$ and $2$ has a direct link to $3$, but $1$ and $3$ are not directly connected. Assume that all the remaining friends of those three individuals are not popular enough to express. The opinion update of individual $1$ depends on their opinion difference with individual $2$ and indirectly depends on the interaction between individual $2$ and $3$. Individuals $1$, $2$ and $3$ form a set of connected expressers. Namely, this set is defined as follows: all the elements of the set are nodes (individuals) who choose to express and any two nodes are connected by a path of expressers within this same set. 
+When an expresser has no neighbors who is also an expresser, this individual remains stubborn and their long-run opinion corresponds to their initial opinion. Furthermore, expressers can have neighbors who are locally popular and choose to express. For instance, consider three expressers $1$, $2$ and $3$. Individual $1$ has a direct link to $2$ and $2$ has a direct link to $3$, but $1$ and $3$ are not directly connected. Assume that all the remaining friends of those three individuals are not popular enough to express. The opinion update of individual $1$ depends on their opinion difference with individual $2$ and indirectly depends on the interaction between individual $2$ and $3$. Individuals $1$, $2$ and $3$ form a set of connected expressers. Namely, this set is defined as follows: all the elements of the set are nodes (individuals) who choose to express and any two nodes are connected by a path of expressers within this same set. 
 
 With this definition in hand, proposition \ref{expressers} considers a group of individuals who belong to the same set of connected expressers and shows that, if each member of the set has only like-minded neighbors, then the long-run opinions of each member is exactly the average of the initial opinions of the members of this set. Each expresser of the group undergoes only the attractive effect. In particular, the group can have members who are ideologically-opposed that are not neighbors. But since they are not directly linked, they do not repulse each other to the upper and lower of the opinion interval and become extreme. Hence the whole group can reach consensus by gathering different viewpoints. This result sheds light on the design of media tools or the formation of discussion groups for initiatives related to participatory democracy.\footnote{For example, think of the Citizens' convention for climate (\textit{convention citoyenne pour le climat}) in France, where $150$ citizens were randomly selected to work in smaller groups on different propositions. } 
 
@@ -173,54 +173,50 @@ Using the findings of the above literature, I introduce an expression heuristic 
 \section{The model} \label{themodel}
 
 \subsection{Set-up} \label{setup}
-A group of individuals $N=\{1, \ldots , n\}$ is embedded in a connected and symmetric network $G$ of interpersonal relationships, with typical entries $g_{ij} = g_{ji}  \in \{ 0,1\}$. Each node represents an individual. The set of friends, colleagues or acquaintances of individual $i \in N$ is denoted by $N_i = \{j \in N : g_{ij}=1 \}$ and $d_i = |N_i|$ is the cardinality of $N_i$. For all $i \in N$, I assume that $g_{ii} =1$. A chain of friends of friends of length $l$ between two individuals $i \neq j \in N$, hereafter called  $path$,  is defined as follows: there exists a sequence of distinct individuals $i=k_0, k_1, \ldots, k_l = j \in N$ such that $g_{ik_1} \times g_{k_1 k_2} \times \ldots \times g_{k_l j} > 0$.
+A group of individuals $N=\{1, \ldots , n\}$ is embedded in a connected and symmetric network $G$ of interpersonal relationships, with typical entries $g_{ij} = g_{ji}  \in \{ 0,1\}$. Each node represents an individual. The set of friends of individual $i \in N$ is denoted by $N_i = \{j \in N : g_{ij}=1 \}$ and $d_i = |N_i|$ is the cardinality of $N_i$. For all $i \in N$, I assume that $g_{ii} =1$. A chain of friends of friends of length $l$ between two individuals $i \neq j \in N$, hereafter called  $path$,  is defined as follows: there exists a sequence of distinct individuals $i=k_0, k_1, \ldots, k_l = j \in N$ such that $g_{ik_1} \times g_{k_1 k_2} \times \ldots \times g_{k_l j} > 0$. The influence of each individual in the network $G$, is measured by a given real valued centrality measure which depends on the network topology, denoted by $\delta_i (G)$ for individual $i \in N$. 
 
-\begin{assumption}
-Each individual $i \in N$ knows $d_i$ and $d_j$ for all $j \in N_i$.
-\end{assumption}
 
 \subsection{Expression heuristic}
 
-Each individual is endowed with an exogenous initial opinion $\alpha_{i,0} \in [-1,1]$ which represents their attitude or stance\footnote{Here an opinion is represented as a real number.} about an issue or a policy $\theta \in [-1,1]$. Individuals exchange opinions about the issue over periods $t \geq 0$. First, each individual $i \in N$ observes opinions in their neighborhood $N$ at period $t$, denoted by ${\alpha}_{j,t} \in [-1,1]$ for all $j \in N_i$. Second, each individual chooses in period $t+1$, whether to express or hide their opinion based on their local popularity parameter \eqref{localpopularity}. They use the following heuristic: 
-\begin{equation*}
-\begin{cases}
- \text{ play hide } & \text{ if } \delta_i < \delta^{*}  \\
-\text{ play express } & \text{ if } \delta_i \geq \delta^{*},
-\end{cases}
+Each individual $i \in N$ is endowed with an exogenous initial opinion $\alpha_{i,0} \in [-1,1]$ which represents their stance about a given issue.\footnote{Can model the issue as $\theta \in [-1,1]$ and make the network depend on it.} Individuals exchange opinions about the issue over $t \geq 0$ periods and they can be like-minded or ideologically-opposed. 
+
+\begin{definition} At period $t \geq 0$, for $\tau \in (0,1)$, two individuals $ i \neq j \in N$ are :  \begin{itemize} \item[(i)]  $like$-$minded$, whenever $|\alpha_{i,t} - \alpha_{j,t}| < \tau$, \item[(ii)] \textit{ideologically-opposed}, whenever $|\alpha_{i,t} - \alpha_{j,t}| \geq \tau$. \end{itemize} \label{definition_likeminded} 
+\end{definition}
+
+At period $t$, each individual $i \in N$ observes the opinions in their neighborhood, denoted by ${\alpha}_{j,t} \in [-1,1]$ for all $j \in N_i$. At period $t+1$, each individual updates their opinion according to a rule which depends on their centrality: 
+
+\begin{equation*} 
+	\begin{cases}
+		 \text{ Hide (rule 1) } & \text{ if } \delta_i (G) < \delta^{*} (G) \\
+		\text{ Express (rule 2) } & \text{ if } \delta_i (G) \geq \delta^{*} (G),
+	\end{cases}
 \end{equation*} 
 \bigskip
 
-\noindent where $\delta^{*}$ denotes an exogenous expression threshold. In the remainder of the paper, the set of individuals who choose to express will be labelled $E=\{ i \in N, \text{ s.t. } \delta_i \geq \delta^{*} \}$. Similarly, the set of individuals who choose to hide their opinions will be labelled $C=\{ i \in N, \text{ s.t. } \delta_i < \delta^{*} \}$.   \\
-\\ {\bf Express \& Hide.} When an individual chooses to express, her/his opinion update will depend on her/his neighbors, who also choose to express. To account for the difference in opinions of two neighbors who interact, I compare their opinion difference to a threshold $\tau \in (0,1)$.
+\noindent where $\delta^{*}$ denotes an exogenous threshold. In the remainder of the paper, the set of individuals who express will be labelled $E=\{ i \in N, \text{ s.t. } \delta_i (G) \geq \delta^{*} (G) \}$. \\
 
-\begin{definition} Two individuals $ i \neq j \in N$ who choose to express are : (i) $like$-$minded$ at period $t \geq 1$ if $|\alpha_{i,t} - \alpha_{j,t}| < \tau$, (ii) \textit{ideologically-opposed} at period $t \geq 1$ if $|\alpha_{i,t} - \alpha_{j,t}| \geq \tau$. Moreover, $\underline{N}_{i,t} =\{ j \in N_i \cap E, |\alpha_{i,t} - \alpha_{j,t}| < \tau\}$ and $\overline{N}_{i,t} =\{ j \in N_i \cap E, |\alpha_{i,t} - \alpha_{j,t}| \geq \tau\}$. 
-\end{definition}
-
-Expression allows for a debate or discussion and opinion update of expressers follows the law of motion described below. It incorporates an attractive and a repulsive effect among direct neighbors who express their opinions. For $\forall i \in E$ and $\mu \in (0,1/2)$: 
-%Law of motion
- \begin{equation}
- \alpha_{i,{t}} =  \alpha_{i,{t-1}} +  \Delta_{\alpha_{i,{t-1}}}  \text{ s.t. } \alpha_{i,t} \in [-1,1],
- \label{lawofmotion}
- \end{equation}
-where 
-%\begin{equation*} \Delta  \alpha_{i,{t-1}} =  \sum_{j \in N_i} \mathbbm{1}_{\{ j \text{ express} \}}\big( \mathbbm{1}_{ \{ |\Delta_{ij,t-1}| < \tau \} }  \Delta_{ji,t-1} + \mathbbm{1}_{ \{ |\Delta_{ij,t-1} | \geq \tau \} }  \Delta_{ij,t-1} \big) \text{ and } \alpha_{i,t} \in [-1,1] \end{equation*} 
-\begin{equation*} \Delta_{\alpha_{i,{t-1}}} = \mu \sum_{j \in \underline{N}_{i,t-1}}   (  \alpha_{j,t-1} - \alpha_{i,t-1} )    - \mu \sum_{j \in \overline{N}_{i,t-1}} ( \alpha_{j,t-1} - \alpha_{i,t-1} ).  \end{equation*} 
-
-Notice that a positive weight is assigned to the opinion of like-minded expressing neighbors at period $t$. While a negative weight is assigned to the opinion of ideologically-opposed expressing neighbors at period $t$.   Moreover, the weights assigned to the opinion of expressing neighbors can change across periods. This happens because expressing neighbors receive influence from their own expressing neighbors (if any). Hence, an initially like-minded expressing neighbor of individual $i$ can become in subsequent periods ideologically-opposed, if their opinion difference with $i$ becomes larger than $\tau$.
-\smallskip
-
-When an individual chooses to hide, they update their opinion by taking the average of opinions expressed within their social circle at the previous period: 
-%\begin{equation}  \alpha_{i,t} = \overline{\alpha}_{i,t-1} = \frac{1}{d_i} \big( g_{ii}  \alpha_{i,t-1} + \sum_{j \neq i \in N} g_{ji} {\alpha}_{j,t-1} \big) \label{average} \end{equation}
+{\noindent \bf Hide (rule 1 or DeGroot)}: when an individual hides their opinion, they update their opinion by taking the average of opinions expressed within their social circle at the previous period: 
 \begin{equation} 
 \alpha_{i,t} = \overline{\alpha}_{i,t-1} = \frac{1}{d_i}  \sum_{j  \in N} g_{ji} {\alpha}_{j,t-1}. \label{average}
 \end{equation}
- 
+  
+{\noindent \bf Express (rule 2)}: when an individual expresses, the opinion updating process depends on: $(i)$ the opinions of neighbors, who also express and $(ii)$ whether two neighbors are like-minded or ideologically opposed (see Definition \ref{definition_likeminded}). More precisely, expression allows for a debate and the opinion updating process of expressers follows a law of motion which allows for agreement and disagreement. It incorporates an attractive (agreement) and a repulsive (disagreement) effect among direct neighbors who express their opinions. For all $ i \in E$ and {\color{red}$\mu \in (0,1/2)$}: 
+%Law of motion
+ \begin{equation}
+ \alpha_{i,{t}} =  \alpha_{i,{t-1}} +  \mu \big( \sum_{j \in \underline{N}_{i,t-1}}   (  \alpha_{j,t-1} - \alpha_{i,t-1} ) - \sum_{j \in \overline{N}_{i,t-1}} ( \alpha_{j,t-1} - \alpha_{i,t-1} ) \big)  \text{ s.t. } \alpha_{i,t} \in [-1,1],
+ \label{lawofmotion}
+ \end{equation}
 
-%First, it allows for a pair of direct neighbors who express opinions which are close $enough$ (lower than a given threshold $\tau$) to update to an opinion which lies between both viewpoints. Second, a pair of direct neighbors who are ideologically-opposed (their opinion difference is higher than a given threshold $\tau$), update to opinions which drift farther and farther. 
+Where $\underline{N}_{i,t} =\{ j \in N_i \cap E, |\alpha_{i,t} - \alpha_{j,t}| < \tau\}$ and $\overline{N}_{i,t} =\{ j \in N_i \cap E, |\alpha_{i,t} - \alpha_{j,t}| \geq \tau\}$. 
+
+\bigskip
+
+\noindent Notice that, expressing neighbors receive influence from their own expressing neighbors (if any). Hence, an initially like-minded expressing neighbor of individual $i$ can become in subsequent periods ideologically-opposed, if their opinion difference with $i$ becomes larger than $\tau$.
+\smallskip
+
+ %Similarly, the set of individuals who hide their opinions will be labelled $C=\{ i \in N, \text{ s.t. } \delta_i < \delta^{*} \}$.   
 
 
- 
-%
 \begin{example} Consider a network $G$ with only two connected individuals $1$ and $2$ who choose to express. Suppose that $\tau=0.5$ and initial opinions are  $\alpha_{1,0}=-0.7$ and $\alpha_{2,0}=0.7$. In period $t=1$, $\alpha_{1,1} = \alpha_{1,0} + \mu_{} ( \alpha_{1,0} - \alpha_{2,0}) =  -0.7 (1 + \mu) - \mu 0.7 < \alpha_{1,0} = -0.7 $ and  $\alpha_{2,1} = \alpha_{2,0} + \mu_{} ( \alpha_{2,0} - \alpha_{1,0}) = 0.7 (1+\mu) + \mu 0.7 > \alpha_{2,0} =0.7$. The updated opinion of individual $1$ becomes more negative or pushed-down towards $-1$, while the updated opinion of individual $2$ more positive or pushed-up towards $1$. Individuals $1$ and $2$ repulse each other. 
 \end{example} 
 
@@ -232,7 +228,7 @@ When an individual chooses to hide, they update their opinion by taking the aver
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Opinion Dynamics} \label{eq}
 
-Given the above model, I am interested in studying the long-run opinions, for a network structure $G$ and a vector of initial opinions $\alpha_0$. Influence can flow from expressers to consensual individuals but not vice versa. I start by considering the evolution of opinions of expressers. Then I characterize in section \ref{convergence} the overall dynamics of opinions and show that long-run opinions always converge.  
+Given the above model, I am interested in studying the long-run opinions, for a network structure $G$ and a vector of initial opinions $\alpha_0$. Then I characterize in section \ref{convergence} the overall dynamics of opinions and show that long-run opinions always converge.  
 
 \subsection{Long-run opinions of expressers}
 \label{LRexpressers}
@@ -524,6 +520,10 @@ To account for centrality, I define and use a measure that is: $(i)$ increasing 
 
 \subsection{Local Popularity}
 Finally, the social status or relative expertise is represented by a local centrality measure which I call $local$ $popularity$. 
+
+\begin{assumption}
+Each individual $i \in N$ knows $d_i$ and $d_j$ for all $j \in N_i$.
+\end{assumption}
 
 \begin{definition}[Local popularity] Let $i \in N$ be an individual and $N_i$ the set of her/his direct friends. Local popularity is: 
 \begin{equation}
