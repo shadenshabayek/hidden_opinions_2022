@@ -1,0 +1,180 @@
+\begin{thebibliography}{10}
+
+\bibitem{acemoglu2013}
+Daron Acemoglu, Giacomo Como, Fabio Fagnani, and Asuman Ozdaglar.
+\newblock Opinion fluctuations and disagreement in social networks.
+\newblock {\em Mathematics of Operations Research}, 38(1), 2013.
+
+\bibitem{acemoglu}
+Daron Acemoglu and Asuman Ozdaglar.
+\newblock Opinion dynamics and learning in social networks.
+\newblock {\em Dyn Games Appl}, 1:3--49, 2011.
+
+\bibitem{banisch_olbrich}
+S.~Banisch and E.~Olbrich.
+\newblock Opinion polarization by learning from social feedback.
+\newblock {\em The Journal of Mathematical Sociology}, 43(2):76--103, 2019.
+
+\bibitem{barabasi}
+Albert-L\'{a}szl\'{o} Barab\'{a}si and R\'{e}ka Albert.
+\newblock Emergence of scaling in random networks.
+\newblock {\em Science}, 286(5439), 1999.
+
+\bibitem{bisinzenou}
+Alberto Bisin, Eleonora Patacchini, Thierry Verdier, and Yves Zenou.
+\newblock Bend it like beckham: Ethnic identity and integration.
+\newblock {\em European Economic Review}, 90:146--164, 2016.
+
+\bibitem{bolletta}
+Ugo Bolletta and Paolo Pin.
+\newblock Polarization when people choose their peers.
+\newblock {\em mimeo}, 2019.
+
+\bibitem{conover}
+M.D. Conover, J.~Ratkiewicz, M.~Francisco, B.Gon\c{c}alves, A.~Flammini, and
+  F.~Menczer.
+\newblock Political polarization on twitter.
+\newblock {\em Proceedings of the Fifth International AAAI conference on
+  weblogs and social media}, 2011.
+
+\bibitem{degroot}
+Morris~H. DeGroot.
+\newblock Reaching a consensus.
+\newblock {\em Journal of the American Statistical Association},
+  69(345):118--121, 1974.
+
+\bibitem{flachesurvey2017}
+Andreas Flache, Michael Mas, Thomas Feliciani, Edmund Chattoe-Brown, Guillaume
+  Deffuant, Sylvie Huet, and Jan Lorenz.
+\newblock Models of social influence: Towards the next frontiers.
+\newblock {\em Journal of Artificial Societies and Social Simulation}, 2017.
+
+\bibitem{friedkin}
+Noah Friedkin and Eugene Johnsen.
+\newblock Social influence and opinions.
+\newblock {\em Journal of mathematical sociology}, 15(3-4):193--205, 1990.
+
+\bibitem{friedkin2015}
+Noah~E. Friedkin.
+\newblock The problem of social control and coordination of complex systems in
+  sociology: a look at the community cleavage problem.
+\newblock {\em IEEE control systems magazine}, June, 2015.
+
+\bibitem{golubsadler}
+Benjamin Golub and Evan Sadler.
+\newblock {\em Learning in Social Networks}, chapter~19.
+\newblock The Oxford Handbook of the Economics of Networks, 2016.
+
+\bibitem{harary}
+F.~Harary.
+\newblock A criterion for unanimity in french's theory of social power.
+\newblock {\em Studies in Social Power}, 1959.
+
+\bibitem{hegselmann}
+Rainer Hegselmann and Ulrich Krause.
+\newblock Opinion dynamics and bounded confidence models, analysis, and
+  simulationb.
+\newblock {\em Journal of Artificial Societies and Social Simulation}, 5(3),
+  2002.
+
+\bibitem{jager}
+Wander Jager and Fr{\'e}d{\'e}ric Amblard.
+\newblock Uniformity, bipolarization and pluriformity captured as generic
+  stylized behavior with an agent-based simulation model of attitude change.
+\newblock {\em Computational and Mathematical Organization Theory},
+  10:295--303, 2004.
+
+\bibitem{dingrhee}
+J.Ding and Noah~H. Rhee.
+\newblock On the equality of algebraic and geometric multiplicities of matrix
+  eigenvalues.
+\newblock {\em Applied Mathematics letters}, 24, 2011.
+
+\bibitem{larson}
+James R.~Larson Jr., Caryn Christensen, Ann~S. Abbott, and Timothy~M. Franz.
+\newblock Diagnosing groups: Charting the flow of information in medical
+  decision-making teams.
+\newblock {\em Journal of Personality and social psychology}, 71(2):315--330,
+  1996.
+
+\bibitem{french}
+J.R. P.~French Jr.
+\newblock A formal theory of social power.
+\newblock {\em Psychol. Rev}, 63, 1956.
+
+\bibitem{latane81}
+Bibb Latan\'{e}.
+\newblock The psychology of social impact.
+\newblock {\em American Psychologist}, 36(4):343--356, 1981.
+
+\bibitem{latane94}
+Bibb Latan\'{e}, Andrej Nowak, and James~H. Liu.
+\newblock Measuring emergent social phenomena: dynamism, polarization, and
+  clustering as order parameters of social systems.
+\newblock {\em Behavioral Science}, 39, 1994.
+
+\bibitem{malliaros}
+Fragkiskis Malliaros and Michalis Vazirgiannis.
+\newblock Clustering and community detection in directed networks: A survey.
+\newblock {\em Physics Reports}, 2013.
+
+\bibitem{melguizo}
+Isabel Melguizo.
+\newblock Persistence of disagreement.
+\newblock {\em miemo}, 2018.
+
+\bibitem{meyer}
+Carl~D. Meyer.
+\newblock {\em Matrix Analysis and Applied linear algebra}.
+\newblock SIAM, 2000.
+
+\bibitem{newman2002}
+M.E.J. Newman.
+\newblock Assortative mixing in networks.
+\newblock {\em Phys. Rev. Lett}, 89, 2002.
+
+\bibitem{sadler}
+Evan Sadler.
+\newblock Influence campains.
+\newblock {\em mimeo}, 2019.
+
+\bibitem{seneta}
+E.~Seneta.
+\newblock {\em Non-negative matrices and markov chains}.
+\newblock Springer Science and Business Media, 2006 edition, 1981.
+
+\bibitem{silva}
+Teresa~M. Silva, Lu\'{i}s Silva, and Sara Fernandes.
+\newblock Convergence time to equilibrium distributions of autonomous and
+  periodic non-autonomous graphs.
+\newblock {\em Linear Algebra and its Applications}, 488:199--215, 2016.
+
+\bibitem{stasser89}
+G.~Stasser, L.~Taylor, and C.~Hanna.
+\newblock Information sampling in structured and unstructured discussions of
+  three and six person groups.
+\newblock {\em Journal of Personality and social psychology}, 57:67--78, 1989.
+
+\bibitem{stasser}
+Garold Stasser and William Titus.
+\newblock Pooling of unshared information in group decision making: Biased
+  information sampling during discussion.
+\newblock {\em Journal of Personality and social psychology}, 48(6):1467--1478,
+  1985.
+
+\bibitem{stasser2003}
+Garold Stasser and William Titus.
+\newblock Hidden profiles: a brief history.
+\newblock {\em Psychological Inquiry}, 14(3):304--313, 2003.
+
+\bibitem{xiao}
+Lin Xiao and Stephen Boyd.
+\newblock Fast linear iterations for distributed averaging.
+\newblock {\em Systems and Control Letters}, 53, 2004.
+
+\bibitem{yildiz2013}
+E.~Yildiz, A.~Ozdaglar, D.~Acemoglu, A.~Saberi, and A.~Scaglione.
+\newblock Binary opinion dynamics with stubborn agents.
+\newblock {\em ACM Trans. Econ. Comp.}, 2013.
+
+\end{thebibliography}
