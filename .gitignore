@@ -5,6 +5,8 @@
 *.json
 *.jsonl
 *.gexf
+*.tex
+*.pdf
 
 .ipynb_checkpoints/
 *.ipynb
@@ -24,9 +26,3 @@ __pycache__
 *.bbl
 
 *.mod
-
-
-test.pdf
-test.tex
-tto2019.sty
-acl_natbib.bst
