@@ -1,0 +1,342 @@
+\documentclass[xcolor=table]{beamer}
+%\documentclass[xcolor=table,handout]{beamer}
+%\documentclass[usenames,dvipsnames]{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+
+\mode<presentation>
+{
+  \usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
+%%  \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %% \usefonttheme{default}  % or try serif, structurebold, ...
+  %%\setbeamertemplate{navigation symbols}{}
+  %%\setbeamertemplate{caption}[numbered]
+} 
+
+%%
+\makeatletter
+
+\definecolor{beamer@blendedblue}{rgb}{0.68, 0.16, 0.16} % changed this
+
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=red!50!black}
+
+\setbeamercolor{structure}{fg=beamer@blendedblue}
+
+\setbeamercolor{background canvas}{parent=normal text}
+\setbeamercolor{background}{parent=background canvas}
+
+\setbeamercolor{palette primary}{fg=red,bg=red} % changed this
+\setbeamercolor{palette secondary}{use=structure,fg=structure.fg!100!red} % changed this
+\setbeamercolor{palette tertiary}{use=structure,fg=structure.fg!100!red} % changed this
+\setbeamercovered{invisible}
+\makeatother
+
+%%%
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[most]{tcolorbox}
+\usepackage{amsthm}
+\usepackage{graphics}
+\usepackage{tikz,lipsum,lmodern}
+\usepackage{combelow}
+\usepackage{bbm}
+\usepackage{newunicodechar}
+\newunicodechar{?}{\cb{s}}
+\usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{blindtext}
+\usepackage{amsmath}
+\usepackage[outline]{contour}
+\usepackage{tikz}
+%\usepackage{fourier}
+\useinnertheme{rectangles}
+
+\usepackage{url}
+\usepackage{background}
+\usepackage{lastpage}
+\usepackage{graphbox}
+
+\logo{\pgfputat{\pgfxy(-11.4,-0.4)}{\pgfbox[center,base]{\includegraphics[scale=0.28]{./img/logo.png}}}
+}
+\setbeamertemplate{footline}[frame number]
+
+\title[Hidden Opinions]{Hidden Opinions}
+\author{Shaden Shabayek}
+\institute{ Post-doctoral Researcher \\ Sciences Po Medialab}
+\date{CTN Barcelona \\ May 20, 2022 }
+
+\makeatletter
+\newbox\@backgroundblock
+\newenvironment{backgroundblock}[2]{%
+  \global\setbox\@backgroundblock=\vbox\bgroup%
+    \unvbox\@backgroundblock%
+    \vbox to0pt\bgroup\vskip#2\hbox to0pt\bgroup\hskip#1\relax%
+}{\egroup\egroup\egroup}
+\addtobeamertemplate{background}{\box\@backgroundblock}{}
+\makeatother
+
+\begin{document}
+\begin{frame}[noframenumbering]
+
+ \titlepage
+ \thispagestyle{empty}
+  
+
+\end{frame}
+
+\begin{frame}{Motivation}
+
+%\begin{backgroundblock}{55mm}{55mm}
+%\includegraphics[width=50mm]{./img/tw.png}
+%\end{backgroundblock}
+
+\begin{itemize} \setlength\itemsep{1em}
+	\item Group {\bf\color{purple}Polarization}   \smallskip 
+	
+		\begin{itemize} \setlength\itemsep{1em}
+			\item[$\star$] Empirical studies, regularity: high internal consensus and sharp disagreement across groups. Examples: climate catastrophe... 
+			\item[$\star$] Implications: economic, political, institutional... also can be a driver of radicalization, cultural shifts, etc. 
+			\item[$\star$] Role  of Digital platforms? Online Social networks? 
+			\item[$\star$] Is it the {\bf\color{purple}technology} (e.g. echo chambers, algorithms) ? Is it the {\bf\color{purple}actors} themselves? 
+		\end{itemize}
+	\item Here, {\bf\color{purple}focus of one possible driver} \& model it: 
+		\begin{itemize} \setlength\itemsep{1em}
+			\item[$\star$] Inequality of attention towards expressed opinions. (mix of the technology argument and the individual behavior argument)
+		\end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%
+\begin{frame}{Motivation \& Idea of the model}
+\begin{itemize} \setlength\itemsep{1em}
+	\item Here, focus on one possible driver \& model it: 
+		\begin{itemize} \setlength\itemsep{1em}
+			\item[$\star$] Inequality of attention towards expressed opinions. 
+		\end{itemize}
+	\item How ? refine DeGroot...
+		\begin{itemize}  \setlength\itemsep{1em}
+			\item[$\star$] Introduce an {\bf\color{purple}Expression heuristic}
+			\item[$\star$] Express  \begin{itemize} \item[$\circ$] Influential individuals {\bf\color{purple}(high centrality)} take part of the discussion and can interact with other influential individuals: {\bf\color{purple}like-minded} or {\bf\color{purple}ideologically-opposed}. \end{itemize}
+			\item[$\star$] Hide \begin{itemize} \item[$\circ$] Normal individuals {\bf\color{purple}(low centrality)} will have little impact on the conversation (update \`{a} la Degroot): e.g. {\bf\color{purple}Retweet} count  \end{itemize}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%
+\begin{frame}{Literature: models of opinion dynamics}
+
+		\begin{itemize} \setlength\itemsep{1em}
+			\item[$\star$] Large literature about {\bf\color{purple}consensus} or agreement
+				\begin{itemize} \smallskip
+				
+					\item[$\circ$] take the average of opinions expressed by all direct contacts, see DeGroot (1974), Harary (1959), French (1956)...
+				\end{itemize} 
+			\item[$\star$] Strand about {\bf\color{purple}disagreement} \smallskip
+				\begin{itemize} \setlength\itemsep{1em} 
+				
+					\item[$\circ$]  {\bf\color{purple}Stubborn agents}, see Friedkin(2015), Acemoglu et al (2013), Yildiz et al. (2013), Sadler (2019). %introduce stubborn agents: in a voter model set-up where opinions are discrete and can take only two discrete real values either $a$ or$ b$. %: either stubborn (never update opinion), or update \`{a} la Degroot. 
+					\item[$\circ$] {\bf\color{purple}Bounded confidence interval}, see for example, Hegselmann and Krauss (2002), Jager and Amblard (2005). %:  update opinion by taking an average over the opinions of neighbors whose opinion difference falls within a confidence interval.
+				\end{itemize}
+		
+		\item[$\star$] But ... (social psychology \& sociology) 
+			\begin{itemize}
+				\item[$\circ$] Not all individuals are equal... influence matters. 
+				\item[$\circ$] Agents may not always share their opinions with others.  
+			\end{itemize}
+		\end{itemize}
+\end{frame}
+%
+\begin{frame}{Literature: social psychology}
+\begin{itemize}
+	\item Stasser and Titus (1985) : individuals in social contexts, do not always share their own opinion or the information they hold.
+		\begin{itemize} \setlength\itemsep{1em}
+			%\item[$\star$] communication: corrective function, members have incomplete information but together gather the different pieces of the puzzle.
+			\item[{\color{gray}$\star$}] {\color{gray}Political set-up: elect Best, Okay or Ohum. }
+			%\item[$\star$] Experiment? distribute different subset of desirable traits of Best and a different subset of Okay’s undesirable traits over the members of the group, such that from each one’s individual perspective Okay appeared more positive than Best. 
+			\item[{\color{gray}$\star$}] {\color{gray}The group as a whole had complete (but dispersed) information about Best, from each one’s individual perspective Okay appeared more positive than Best. }%they could exchange it and come to the conclusion that Best was actually the best candidate. 
+			\item[{\color{gray}$\star$}] {\color{gray}Before AND after discussion Best received 25\% of endorsement.} 
+		\end{itemize}
+		\item Larson et al. (1996): sharing a unique piece of information during a discussion, is more likely by higher status members rather than lower status members.
+			\begin{itemize} \setlength\itemsep{1em}
+				\item[{\color{gray}$\star$}] {\color{gray}Experiment: residents, interns \& 3rd-year medical students.}
+				\item[{\color{gray}$\star$}] {\color{gray}Main result: residents were more likely to repeat (unique) information when compared to interns and students.}
+			\end{itemize} 	
+\end{itemize}
+%repeating a unique piece of information, leading to the formation of group opinion during a discussion, is more likely by higher status members (experts, leaders, etc.) rather than lower status members.
+\end{frame}
+%
+%Larson et al. (1996) [17] suggest that repeating a unique piece of information, leading to the formation of group opinion during a discussion, is more likely by higher status members (experts, leaders, etc.) rather than lower status members. They ran an experiment with residents, interns and 3rd-year medical students and they show that residents were more likely to repeat (unique) information when compared to interns and students.
+
+
+\begin{frame}[noframenumbering, plain]
+\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!3,colframe=red!40,colbacktitle=red!40 ,fonttitle=\bfseries, boxed title style={size=small,colframe=red!50} ] 
+\centering Model
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Model}
+\begin{itemize}\setlength\itemsep{1em}
+	\item {\bf\color{purple}Network}, {\bf\color{purple}Influence} \& {\bf\color{purple}Initial Opinions} 
+	\begin{itemize}\setlength\itemsep{1em}
+		\item[$\star$] Group of individuals $N = \{ 1, \ldots, n\}$ embedded in
+		\item[$\star$] ... a connected symmetric network: $G$, $g_{ij} = g_{ji} \in \{ 0,1\}$.
+		\item[$\star$] Set of friends of $i \in N$: $\{ j \in N: g_{ij} =1 \}$ and $d_i = |N_i|$. 
+		\item[$\star$] The influence or {\bf\color{purple}centrality} of $i \in N$: $\lambda_i (G) \in \mathbb{R}_{+}^{*}$.
+		\item[$\star$] Exogenous initial opinion for $i \in N$: $\alpha_{i,0} \in [-1,1]$
+		
+	\end{itemize}
+	\end{itemize}
+	\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!3,colframe=red!40,colbacktitle=red!40 ,fonttitle=\bfseries, boxed title style={size=small,colframe=red!50}, title ={Definition} ]  At period $t \geq 0$, for $\tau \in (0,1)$, $i \neq j \in N$ are:
+	\begin{itemize}
+		\item {\bf\color{purple} like-minded}: $|\alpha_{i,t} - \alpha_{j,t}| < \tau$
+		\item {\bf\color{purple} ideologically-opposed}: $|\alpha_{i,t} - \alpha_{j,t}| \geq \tau$
+	\end{itemize}
+	\end{tcolorbox}
+
+\end{frame}
+%
+\begin{frame}{Model}
+	%\begin{itemize}
+		%\item For $i \in N$, with centrality/influence $\delta_i (G)$
+		
+				\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!3,colframe=red!40,colbacktitle=red!40 ,fonttitle=\bfseries, boxed title style={size=small,colframe=red!50}, title ={Opinion Updating} ]  For $i \in N$, with centrality $\delta_i (G)$
+\begin{equation*} 
+	\begin{cases}
+		 \text{ Hide (rule 1): DeGroot } & \text{ if } \delta_i (G) < \delta^{*} (G) \\
+		\text{ Express (rule 2): see Below } & \text{ if } \delta_i (G) \geq \delta^{*} (G)
+	\end{cases}
+\end{equation*} 
+	\end{tcolorbox}
+	
+	\begin{itemize}
+		\item Rule 2 \begin{itemize} \item[$\star$] $\forall j \in N_i$, such that $ \delta_j(G) \geq \delta^{*} (G)$ \item[$\star$] {$\mu \in (0,1/2)$} and {\bf\color{purple}$\alpha_{i,t} \in [-1,1]$} \end{itemize} 
+	\end{itemize}
+	%\smallskip
+ 	\begin{equation*}
+	\begin{split}
+	 \alpha_{i,{t}}  =  & \; \alpha_{i,{t-1}} \\  +   & \; \mu \big( \underbrace{\sum_{j \in \underline{N}_{i,t-1}}   (  \alpha_{j,t-1} - \alpha_{i,t-1} )}_{\substack{\text{{\bf\color{purple}Attractive Effect}} \\ \\ \text{{\bf\color{purple}Like-minded} neighbors } \underline{N}_{i,t}}} \; - \underbrace{\sum_{j \in \overline{N}_{i,t-1}} ( \alpha_{j,t-1} - \alpha_{i,t-1} ) \big)}_{\substack{\text{{\bf\color{purple}Repulsive Effect}} \\ \\ \text{{\bf\color{purple}Ideologically-opposed} neighbors } \overline{N}_{i,t}}}    \label{lawofmotion}
+	 \end{split}
+ 	\end{equation*}
+
+%$\text{ s.t. } \alpha_{i,t} \in [-1,1]$ \smallskip
+
+
+\end{frame}
+%
+\begin{frame}{How does Rule 2 work? some examples! }
+\begin{itemize} \item[$\star$] Hypo: threshold opinion difference $\tau = 0.5$ \& same influence \end{itemize}
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 0.55]{./img/ideo_opp_1.png}
+  %\captionof{figure}{A figure}
+  %\label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 0.55]{./img/plot_ideo_opposed.jpg}
+ % \captionof{figure}{Another figure}
+  %\label{fig:test2}
+\end{minipage}
+\end{figure}
+%
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 0.55]{./img/cons_2.png}
+  %\captionof{figure}{A figure}
+  %\label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 0.55]{./img/plot_like_minded.jpg}
+ % \captionof{figure}{Another figure}
+  %\label{fig:test2}
+\end{minipage}
+\end{figure}
+\end{frame}
+%
+\begin{frame}{How does Rule 2 work? more examples! }
+\begin{itemize} \item[$\star$] Hypo: threshold opinion difference $\tau = 0.5$ \& same influence \end{itemize}
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 0.55]{./img/moderate.png}
+  %\captionof{figure}{A figure}
+  %\label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 0.55]{./img/plot_moderate.jpg}
+ %\caption{figure}{Moderate Opinions}
+  %\label{fig:test2}
+\end{minipage}
+\end{figure}
+%
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 0.55]{./img/ideo_non_monotonic.png}
+  %\captionof{figure}{A figure}
+  %\label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 0.55]{./img/plot_ideo_opposed_non_monotonic.jpg}
+ % \captionof{figure}{Another figure}
+  %\label{fig:test2}
+\end{minipage}
+\end{figure}
+\end{frame}
+%
+\begin{frame}{Results? Long-run opinions? Hearing matrix}
+
+\begin{itemize}\setlength\itemsep{1em}
+	\item Opinions of ``expressers" (influential players) and the way they are connected governs the dynamics of opinions...
+\end{itemize}
+\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!3,colframe=red!40,colbacktitle=red!40, title=Proposition ,fonttitle=\bfseries, boxed title style={size=small,colframe=red!50} ] 
+
+%Let $i \in N$, s.t. $\delta_i \geq1/2$ .
+%\eqref{lawofmotion}. 
+\begin{itemize}
+\setlength\itemsep{1em}
+%	\item[$(i)$] <1->  If player $i$ has no neighbors who express then %$i$ is forever stubborn.  
+%%	$\forall j \in N_i \cap C \mbox{ }  \Rightarrow \mbox{ } \forall t \geq 1, $ 
+%$a_{i,t} = \alpha_{i,0}$
+	\item[$(i)$]  If $i$ has exactly $k$ neighbors who $express$ and they are all {\bf\color{purple}like-minded}, then $\exists t^* \geq t, \mbox{ }\forall t' \geq t^* $ :
+	%$ \exists! j \in N_i \cap E,  |\alpha_{i,0} - \alpha_{j,0} |< \tau \Rightarrow \exists T \geq t, \mbox{ }\forall t' \geq T, $ 
+	$ a_{i,t'} = ({\alpha_{i,0} + \alpha_{k_1,0}  + \ldots + \alpha_{k_k,0} })/{k}$
+	\item[$(ii)$]  If player $i$ has, at every period, {\bf\color{purple}at least one neighbor} $j$ who expresses and {\bf\color{purple}ideologically opposed}, then $ \exists t^{*} \geq t, \mbox{ }\forall t' \geq t^{*},$ $ \mbox{ } a_{i,t'} = -1, \mbox{ }a_{j,t'} = 1$
+	\item[$(iii)$]  If player $i$ has, at every period, {\bf\color{purple}like-minded neighbors} who express and is {\bf\color{purple}linked by a path} to a pair of ideologically opposed expressers, then  $a_{i,t} = \alpha_{i,0}$
+\end{itemize}
+\end{tcolorbox}
+\end{frame}
+%
+\begin{frame}{Result 1: convergece}
+
+\end{frame}
+%
+\begin{frame}{Result 2}
+
+\end{frame}
+%
+\begin{frame}[noframenumbering, plain]
+\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!3,colframe=red!40,colbacktitle=red!40 ,fonttitle=\bfseries, boxed title style={size=small,colframe=red!50} ] 
+\centering Simulations
+\end{tcolorbox}
+\end{frame}
+%%%%%%
+\begin{frame}{Simulations}
+\begin{itemize} \item
+\end{itemize}
+\end{frame}
+
+\end{document}

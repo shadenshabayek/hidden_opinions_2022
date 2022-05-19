@@ -26,4 +26,4 @@ __pycache__
 *.bbl
 
 *.mod
-!article/presentation
+!article/presentation/HO_shaden_2022.tex
