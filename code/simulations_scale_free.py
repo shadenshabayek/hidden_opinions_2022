@@ -5,6 +5,39 @@ import matplotlib.pyplot as plt
 
 from utils import (save_figure)
 
+def get_local_centrality(links):
+    #links = {0: [1,6], 1: [0,2], 2: [1,3], 3: [2,4], 4: [3,5], 5: [4,6], 6: [5,0]}
+
+    centralities_dict = {}
+    centralities_array = []
+
+    for player in links.keys():
+        d = len(links[player])
+        sum_d = []
+
+        for i in links[player]:
+            d_neighbor = len(links[i])
+            sum_d.append(d_neighbor)
+
+        if sum(sum_d) > 0:
+            centrality = d / sum(sum_d)
+            centralities_array.append(centrality)
+            centralities_dict[player] = centrality
+        else:
+            centrality = 0
+            centralities_array.append(centrality)
+            centralities_dict[player] = centrality
+
+    print(centralities_array)
+    return centralities_array, centralities_dict
+
+def get_type(links):
+
+    types_dict = {}
+    types_array = []
+
+    return types_array, types_dict
+
 def generate_random_opinion_vector(n):
 
     initial_opinions = [rd.uniform(-1,1) for _ in range(n)]
@@ -19,6 +52,11 @@ def generate_scale_free_network(n, m):
     links = dict(zip(u.source, u.list_neighbors))
 
     return G, links, n, m
+
+#def get_local_centrality():
+#def get_type():
+#def generate_graph_with_attribute():
+#def level_polarization():
 
 def plot_network (n, m):
 
@@ -52,5 +90,6 @@ def plot_network (n, m):
     #plt.show()
 
 if __name__ == '__main__':
-    
-    plot_network (n = 20, m = 2)
+
+    #plot_network (n = 20, m = 2)
+    get_local_centrality()
