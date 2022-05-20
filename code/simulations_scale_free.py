@@ -1,12 +1,15 @@
 import networkx as nx
 import numpy as np
 import pandas as pd
+import pickle
 import random as rd
 import matplotlib.pyplot as plt
 
 from collections import Counter
 from utils import (save_figure,
-                   update_opinions_two_types)
+                   update_opinions_two_types,
+                   save_list,
+                   read_list)
 
 def add_missing_links(df):
 
@@ -39,20 +42,15 @@ def add_missing_links(df):
 def generate_scale_free_network(n, m):
 
     G = nx.barabasi_albert_graph(n = n, m = m, seed = None)
-    #print(G.edges)
     df = nx.to_pandas_edgelist(G, nodelist=G.nodes)
     df[["source", "target"]]
-    #print('len df before missing links', len(df))
     df = add_missing_links(df)
-    #print('len df after missing links', len(df))
     u = df.groupby(["source"])["target"].apply(list).reset_index(name='list_neighbors')
-    #print(u)
     links = dict(zip(u.source, u.list_neighbors))
-    #print(links)
+
     return G, links, n, m
 
 def get_local_centrality(links):
-    #links = {0: [1,6], 1: [0,2], 2: [1,3], 3: [2,4], 4: [3,5], 5: [4,6], 6: [5,0]}
 
     centralities_dict = {}
     centralities_array = []
@@ -128,14 +126,14 @@ def plot_network (G, n, m):
     save_figure('test_net.jpg')
     #plt.show()
 
-def get_updated_opinions(n,m, N, tau, mu):
+def get_updated_opinions(n,m, N, tau, mu, opinions):
 
     G, links, n, m = generate_scale_free_network(n , m )
     centralities_array, centralities_dict = get_local_centrality(links)
-    lim_centrality = np.mean(centralities_array)
+    lim_centrality = np.quantile(centralities_array, 0.8)
     print('mean centrality set as lim', lim_centrality)
     types_array, types_dict = get_type(links, lim_centrality, centralities_dict)
-    opinions = generate_random_opinion_vector(n)
+
 
     matrix = np.zeros((n,N))
     matrix[:,0] = opinions
@@ -146,10 +144,11 @@ def get_updated_opinions(n,m, N, tau, mu):
 
     return links, types_array, types_dict, matrix, N
 
-def add_attributes(n,m, N, tau, mu, name_plot):
+def add_attributes(n,m, N, tau, mu, name_plot, opinions):
 
-    links, types_array, types_dict, matrix, N = get_updated_opinions(n,m, N, tau, mu)
+    links, types_array, types_dict, matrix, N = get_updated_opinions(n,m, N, tau, mu, opinions)
     G = nx.from_dict_of_lists(links)
+    plot_network (G, n, m)
     op = matrix[:,N-1]
 
     attributes_1 = {}
@@ -165,24 +164,47 @@ def add_attributes(n,m, N, tau, mu, name_plot):
     nx.set_node_attributes(G, attributes_1, name="opinion")
     nx.set_node_attributes(G, attributes_2, name="type")
 
+    set_expressers = []
+    for node in G.nodes:
+        if attributes_2[node] == 'express':
+            set_expressers.append(node)
+
+    H = G.subgraph(set_expressers)
+    n_H = nx.number_connected_components(H)
+    print('number connected components of expressers', n_H)
+    assortativity_G = nx.degree_assortativity_coefficient(G)
+    print('degree assortativity of G', assortativity_G)
+
     print('average op', np.mean(op))
     print('max op', np.max(op))
     print('var op', np.var(op))
     print(Counter(types_dict.values()))
     nx.write_gexf(G, './data/BA_{}.gexf'.format(name_plot))
+    nx.write_gexf(H, './data/BA_{}_subgraph_expressers.gexf'.format(name_plot))
 
-def main():
+    return G
 
-    n = 200
-    m = 5
-    N = 200
-    tau = 0.5
-    mu = 0.2
-    
-    name_plot = 'test_1'
-    add_attributes(n,m, N, tau, mu, name_plot)
+def run_simulations(opinions, n, name_plot):
 
+    m = 6
+    N = 500
+    tau = 0.45
+    mu = 0.4
+
+    add_attributes(n, m, N, tau, mu, name_plot, opinions)
+
+def main(new_opinion_vector):
+
+    n = 600
+    if new_opinion_vector == 1:
+        opinions = generate_random_opinion_vector(n)
+        save_list(opinions, 'opinions_5.txt')
+    else:
+        opinions = read_list('opinions_5.txt')
+
+    name_plot = 'run_6_nodes_08_quantile_{}'.format(n)
+    run_simulations(opinions, n, name_plot)
 
 if __name__ == '__main__':
 
-    main()
+    main(new_opinion_vector = 0)

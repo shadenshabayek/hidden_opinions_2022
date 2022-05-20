@@ -68,3 +68,20 @@ def update_opinions_two_types(n, links, op, mu, tau, types):
             vector_op.append(b)
 
     return vector_op
+
+def save_list(list, file_name):
+
+    file_path = os.path.join('.', 'data', file_name)
+    #file_name has to be .txt
+
+    with open(file_path, "wb") as fp:
+        pickle.dump(list, fp)
+
+def read_list(file_name):
+
+    file_path = os.path.join('.', 'data', file_name)
+
+    with open(file_path, "rb") as fp:   # Unpickling
+        b = pickle.load(fp)
+
+    return b

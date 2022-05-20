@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2022-05-20">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes mode="static" class="node">
+      <attribute id="0" title="opinion" type="float" />
+      <attribute id="1" title="type" type="string" />
+    </attributes>
+    <nodes>
+      <node id="131" label="131">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="259" label="259">
+        <attvalues>
+          <attvalue for="0" value="0.36846962788561094" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="134" label="134">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="135" label="135">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="263" label="263">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="265" label="265">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="145" label="145">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="275" label="275">
+        <attvalues>
+          <attvalue for="0" value="-0.8470227374558674" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="285" label="285">
+        <attvalues>
+          <attvalue for="0" value="-0.2921160761047801" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="30" label="30">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="286" label="286">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="292" label="292">
+        <attvalues>
+          <attvalue for="0" value="-0.8122498272833056" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="47" label="47">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="175" label="175">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="180" label="180">
+        <attvalues>
+          <attvalue for="0" value="0.3856441151684205" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="181" label="181">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="185" label="185">
+        <attvalues>
+          <attvalue for="0" value="-0.017606234524591452" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="187" label="187">
+        <attvalues>
+          <attvalue for="0" value="0.7238655828081462" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="59" label="59">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="188" label="188">
+        <attvalues>
+          <attvalue for="0" value="0.6434701654225767" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="189" label="189">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="196" label="196">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="73" label="73">
+        <attvalues>
+          <attvalue for="0" value="-1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="77" label="77">
+        <attvalues>
+          <attvalue for="0" value="-0.9169988692505564" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="78" label="78">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="218" label="218">
+        <attvalues>
+          <attvalue for="0" value="0.37043491516918725" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="222" label="222">
+        <attvalues>
+          <attvalue for="0" value="0.7885539370045054" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="104" label="104">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="242" label="242">
+        <attvalues>
+          <attvalue for="0" value="-0.8285349555703798" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="244" label="244">
+        <attvalues>
+          <attvalue for="0" value="-0.14164795647426165" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="245" label="245">
+        <attvalues>
+          <attvalue for="0" value="-0.11500242504046945" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="121" label="121">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+      <node id="125" label="125">
+        <attvalues>
+          <attvalue for="0" value="0.6411450024323081" />
+          <attvalue for="1" value="express" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="131" target="145" id="0" />
+      <edge source="263" target="187" id="1" />
+      <edge source="275" target="285" id="2" />
+      <edge source="180" target="125" id="3" />
+      <edge source="180" target="188" id="4" />
+      <edge source="181" target="188" id="5" />
+      <edge source="78" target="222" id="6" />
+    </edges>
+  </graph>
+</gexf>

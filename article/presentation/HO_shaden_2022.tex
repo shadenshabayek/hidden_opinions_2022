@@ -112,35 +112,46 @@
 \end{itemize}
 \end{frame}
 %%%%%%
-\begin{frame}{Motivation}
+\begin{frame}{Motivation: hidden opinions}
 \begin{figure}
 \centering
-\begin{minipage}{.3\textwidth}
-  %\centering
-  \includegraphics[scale = 0.07]{./img/pie_tweets_scientists.jpg}
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 0.25]{./img/shaden_tw.png}
   %\captionof{figure}{A figure}
   %\label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.3\textwidth}
+\begin{minipage}{.4\textwidth}
   \centering
-  \includegraphics[scale = 0.07]{./img/pie_tweets_activists.jpg}
- % \captionof{figure}{Another figure}
-  %\label{fig:test2}
-\end{minipage}
-\begin{minipage}{.3\textwidth}
-  \centering
-  \includegraphics[scale = 0.07]{./img/pie_tweets_delayers.jpg}
+  \includegraphics[scale = 0.25]{./img/obama_tw.png}
  % \captionof{figure}{Another figure}
   %\label{fig:test2}
 \end{minipage}
 \end{figure}
+\end{frame}
 
+\begin{frame}{Motivation: hidden opinions}
+\vspace{3mm}
+\begin{itemize}
+\item[$\star$] Tweets of an ``influential" set of actors with +10k followers), that speak about climate over 6 month in 2021 \smallskip
+
+	\begin{itemize}\setlength\itemsep{1em}
+		\item[$\circ$] Green: Retweets $~47\%$ of the corpus, and 
+		\item[$\circ$] Blue: only $19.7$ of ``raw'' tweets
+		\item[$\circ$] Take the set of Tweets who have used the hashtag COP26 during COP26: the whole pie becomes green...  
+	\end{itemize} 
+\end{itemize}
+\begin{figure}
+\centering
+  \includegraphics[scale = 0.06]{./img/pie_tweets_all.jpg}
+\end{figure}
 \end{frame}
 \begin{frame}{Motivation \& Idea of the model}
 \begin{itemize} \setlength\itemsep{1em}
 	\item Here, focus on one possible driver \& model it: 
 		\begin{itemize} \setlength\itemsep{1em}
-			\item[$\star$] Inequality of attention towards expressed opinions. 
+			\item[$\star$] Inequality of attention towards expressed opinions: Influence matters
+			\item[$\star$] not all opinions have an impact on the discours: hidden opinions, but will matter for the fan base... 
 		\end{itemize}
 	\item How ? refine DeGroot...
 		\begin{itemize}  \setlength\itemsep{1em}
@@ -429,7 +440,36 @@ s_i = \frac{1}{n} (\mathcal{G}' \mathbf{1} )_{i}
 \begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!3,colframe=red!40,colbacktitle=red!40 ,fonttitle=\bfseries, boxed title style={size=small,colframe=red!50} ] 
 \centering Simulations
 \end{tcolorbox}
+\begin{itemize}
+\item[$\star$] {\color{gray}\small see: \href{https://github.com/shadenshabayek/hidden_opinions_2022}{github.com/shadenshabayek/hidden\_opinions\_2022}}
+\end{itemize}
 \end{frame}
+
+\begin{frame}{Simulations}
+\begin{itemize} 
+\item Centrality measure ?  Local popularity or expertise    $${\color{purple}\delta_i= \frac{d_i -1}{\sum_{j \in N_i} d_j -1}}$$ \begin{itemize} \setlength\itemsep{1em}
+	\item[$\star$] The lower the neighbors' influence sources, the higher the local popularity of $i$. 
+	\item[$\star$] {\bf\color{purple}Dynamic Social Impact Theory} (Latan\'{e} 96): marginally decreasing impact of increasing numbers of sources
+	\item[$\star$] {\bf\color{purple}Persuasiveness strength} : a very simple way to model probability of persuasiveness. 
+	%\item[$\star$] A simple measure that does not depend on the whole structure of the network, very unlikely for an individual to know the whole structure... 
+\end{itemize} 
+\item Polarization ? Keep It Simple Stupid ...  
+\begin{itemize} 
+	\item[$\star$] For now simply {\bf \color{purple} variance in long-run opinions} \\ {\color{gray}(many measures of course: Esteban and Rey, appealing but $\alpha$ parameter?)}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+%
+
+\begin{frame}{One run}
+\begin{itemize}
+	\item Scale free network: Barabasi Albert Graph with 6 initial hubs and a total of 600 nodes
+\end{itemize}
+
+
+\end{frame}
+% The main statement of the theory is that total impact of a group of people on an individual is a multiplicative function of their strength, immediacy, and number. Latan ́e, Nowak and Liu (1994) [21] use this theory to study through simulations the dynamics of attitude change in groups and societies. Rather than studying attitude distribution as the usual percentage frequencies of different attitude choices, they study the distribution of attitudes in space. Using immediacy, they are able to explain phenomena such as attitude clustering because individuals are more influenced by nearby individuals. In particular, distance between persons is used to compute immediacy and it is used along with strength to compute for each person the total persuasive impact and supportive impact. A person will change his/her position if and only if the total persuasive impact (the pressure to change to a different po- sition) outweighs the pressure to main- tain one’s own position (the strength of the initial position plus any supportive impact). Using computer simulations, they find that individuals cluster in the social space in terms of position similarity.
+
 %%%%%%
 \begin{frame}{Simulations}
 \begin{itemize} \item
