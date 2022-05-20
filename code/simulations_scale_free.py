@@ -4,6 +4,7 @@ import pandas as pd
 import pickle
 import random as rd
 import matplotlib.pyplot as plt
+import networkx.algorithms.community as nx_comm
 
 from collections import Counter
 from utils import (save_figure,
@@ -126,14 +127,13 @@ def plot_network (G, n, m):
     save_figure('test_net.jpg')
     #plt.show()
 
-def get_updated_opinions(n,m, N, tau, mu, opinions):
+def get_updated_opinions(n,m, N, tau, mu, opinions, quantile):
 
     G, links, n, m = generate_scale_free_network(n , m )
     centralities_array, centralities_dict = get_local_centrality(links)
-    lim_centrality = np.quantile(centralities_array, 0.8)
+    lim_centrality = np.quantile(centralities_array, quantile)
     print('mean centrality set as lim', lim_centrality)
     types_array, types_dict = get_type(links, lim_centrality, centralities_dict)
-
 
     matrix = np.zeros((n,N))
     matrix[:,0] = opinions
@@ -144,12 +144,30 @@ def get_updated_opinions(n,m, N, tau, mu, opinions):
 
     return links, types_array, types_dict, matrix, N
 
-def add_attributes(n,m, N, tau, mu, name_plot, opinions):
+def plot_hist_opinions(data):
 
-    links, types_array, types_dict, matrix, N = get_updated_opinions(n,m, N, tau, mu, opinions)
+    cm = plt.cm.get_cmap("bwr")
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+    _, bins, patches = ax.hist(data,color="r",bins=20)
+    bin_centers = 0.5*(bins[:-1]+bins[1:])
+    col = bin_centers - min(bin_centers)
+    col /= max(col)
+    ax.tick_params(axis='x', rotation=45)
+
+    for c, p in zip(col, patches):
+        plt.setp(p, "facecolor", cm(c))
+
+
+def add_attributes(n,m, N, tau, mu, name_plot, opinions, quantile):
+
+    links, types_array, types_dict, matrix, N = get_updated_opinions(n,m, N, tau, mu, opinions, quantile)
     G = nx.from_dict_of_lists(links)
-    plot_network (G, n, m)
+    #plot_network (G, n, m)
     op = matrix[:,N-1]
+
+    plot_hist_opinions(op)
+    save_figure('hist_opinions_{}'.format(name_plot))
 
     attributes_1 = {}
 
@@ -174,6 +192,8 @@ def add_attributes(n,m, N, tau, mu, name_plot, opinions):
     print('number connected components of expressers', n_H)
     assortativity_G = nx.degree_assortativity_coefficient(G)
     print('degree assortativity of G', assortativity_G)
+    #modularity = nx_comm.modularity(G, list(G.nodes))
+    #print(modularity)
 
     print('average op', np.mean(op))
     print('max op', np.max(op))
@@ -184,14 +204,13 @@ def add_attributes(n,m, N, tau, mu, name_plot, opinions):
 
     return G
 
-def run_simulations(opinions, n, name_plot):
+def run_simulations(opinions, n, name_plot, quantile):
 
     m = 6
-    N = 500
+    N = 300
     tau = 0.45
     mu = 0.4
-
-    add_attributes(n, m, N, tau, mu, name_plot, opinions)
+    add_attributes(n, m, N, tau, mu, name_plot, opinions, quantile)
 
 def main(new_opinion_vector):
 
@@ -202,8 +221,10 @@ def main(new_opinion_vector):
     else:
         opinions = read_list('opinions_5.txt')
 
-    name_plot = 'run_6_nodes_08_quantile_{}'.format(n)
-    run_simulations(opinions, n, name_plot)
+
+    quantile = 0.8
+    name_plot = 'run_8_nodes_08_quantile_{}'.format(n)
+    run_simulations(opinions, n, name_plot, quantile)
 
 if __name__ == '__main__':
 
