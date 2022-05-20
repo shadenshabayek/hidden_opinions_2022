@@ -1,5 +1,5 @@
-\documentclass[xcolor=table]{beamer}
-%\documentclass[xcolor=table,handout]{beamer}
+%\documentclass[xcolor=table]{beamer}
+\documentclass[xcolor=table,handout]{beamer}
 %\documentclass[usenames,dvipsnames]{beamer}
 %
 % Choose how your presentation looks.
@@ -107,11 +107,35 @@
 		\end{itemize}
 	\item Here, {\bf\color{purple}focus of one possible driver} \& model it: 
 		\begin{itemize} \setlength\itemsep{1em}
-			\item[$\star$] Inequality of attention towards expressed opinions. (mix of the technology argument and the individual behavior argument)
+			\item[$\star$] Inequality of attention towards expressed opinions \& not every one ``expresses" (mix of the technology argument and the individual behavior argument)
 		\end{itemize}
 \end{itemize}
 \end{frame}
 %%%%%%
+\begin{frame}{Motivation}
+\begin{figure}
+\centering
+\begin{minipage}{.3\textwidth}
+  %\centering
+  \includegraphics[scale = 0.07]{./img/pie_tweets_scientists.jpg}
+  %\captionof{figure}{A figure}
+  %\label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.3\textwidth}
+  \centering
+  \includegraphics[scale = 0.07]{./img/pie_tweets_activists.jpg}
+ % \captionof{figure}{Another figure}
+  %\label{fig:test2}
+\end{minipage}
+\begin{minipage}{.3\textwidth}
+  \centering
+  \includegraphics[scale = 0.07]{./img/pie_tweets_delayers.jpg}
+ % \captionof{figure}{Another figure}
+  %\label{fig:test2}
+\end{minipage}
+\end{figure}
+
+\end{frame}
 \begin{frame}{Motivation \& Idea of the model}
 \begin{itemize} \setlength\itemsep{1em}
 	\item Here, focus on one possible driver \& model it: 
@@ -297,7 +321,7 @@
 \end{figure}
 \end{frame}
 %
-\begin{frame}{Results? Long-run opinions? Hearing matrix}
+\begin{frame}{Long-run opinions? Hearing matrix}
 
 \begin{itemize}\setlength\itemsep{1em}
 	\item Opinions of ``expressers" (influential players) and the way they are connected governs the dynamics of opinions...
@@ -320,14 +344,87 @@
 \end{tcolorbox}
 \end{frame}
 %
-\begin{frame}{Result 1: convergece}
+\begin{frame}{Long-run opinions? Hearing matrix}
+\begin{itemize} \setlength\itemsep{1em}
+	\item Lemma : when a pair of expressers are initially {\bf\color{purple}like-minded} they take a {\bf\color{purple}longer time} to reach {\bf\color{purple}consensus} 
+	\item but when the pair is ideologically-opposed they {\bf\color{purple}disagree at a much faster rate}
+\end{itemize}
+	\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!3,colframe=red!40,colbacktitle=red!40, title=Lemma ,fonttitle=\bfseries, boxed title style={size=small,colframe=red!50} ]  Let $i \neq j \in \mathcal{E} \subset E$ s.t. $|\mathcal{E}|=2$ \& $t_{\alpha_{\infty }} = \min \{ t : | \alpha_{t} - \alpha_{\infty } | < \epsilon  \} $ . \\ 
+	If $\alpha_{\infty}^a$ is the long-run opinion vector when $|\alpha_{i,0} - \alpha_{j,0} | < \tau$ and $\alpha^r_{\infty}$ is the long-run opinion vector when $|\alpha_{i,0} - \alpha_{j,0} | \geq \tau$ then $t_{\alpha^r_{\infty }} < t_{\alpha^a_{\infty }}$.  \end{tcolorbox}
+	
 
 \end{frame}
 %
-\begin{frame}{Result 2}
+\begin{frame}{Long-run opinions? Hearing matrix}
+
+\begin{itemize}\setlength\itemsep{1em}
+
+\item $t^{*} $:  time period where repulsion is exhausted. \smallskip
+
+	\begin{itemize} \item[$\star$] {\color{gray}by which the least ideologically-opposed pair of directly connected expressers, have repulsed each other to reach opinions at the upper and lower bound of the opinion interval.} \end{itemize}
+	\item For any  $t \geq t^{*}$, build a hearing matrix $\tilde{G}$ which takes into account both updating rules : 
+		\begin{itemize}\setlength\itemsep{1em}
+			\item[$\star$] Hide (rule 1): so for low influence players $\tilde{g}_{ij} = g_{ij} /d_i$ 
+			\item[$\star$] Express (rule 2): three cases, either stubborn so $\tilde{g}_{ij} = 0$ for all $j$, or $k$  like minded friends who express $\tilde{g}_{ij} = 1 - k\mu$, or at least one ideologically-opposed friend $\tilde{g}_{ii} = 1$ and $\tilde{g}_{ij} = 0$
+		\end{itemize}
+		\end{itemize}
 
 \end{frame}
+
+%%
+\begin{frame}{Long-run opinions? Hearing matrix}
+\vspace{3mm}
+Given the vector $\mathbf{a}_t = ( a_{1,t}, \ldots, a_{n,t} )$ for $t \geq t^{*}$, the evolution of opinions is now given by:
+
+\begin{equation}
+\mathbf{a'}_{t+1} = \tilde{G} \mathbf{a'}_t
+\label{LRlawofmotion}
+\end{equation} 
+\pause
+\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!5,colframe=red!40,colbacktitle=red!40 ,fonttitle=\bfseries, boxed title style={size=small,colframe=red!50} ]
+ \centering Long-run opinions $\mathbf{a}_{\infty}$ ?   
+ \end{tcolorbox}
+\pause
+\begin{itemize}
+\item Long-run opinion is simply: $a_{\infty} = (\lim_{t \rightarrow \infty} \tilde{G}^{t} ) a_{t^{*}}$
+\pause
+\item  Entries of $(\lim_{t \rightarrow \infty} \tilde{G}^{t} )_{ij}$? how much eventual weight in the final belief of player $i$ that each player $j$'s initial belief has. 
+\item $\tilde{G}$ is row-stochastic with strictly positive diagonal entries. I will use this to compute the limit... 
+
+\end{itemize}
+\end{frame}
 %
+\begin{frame}{Convergence}\label{theorem1}
+
+\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!5,colframe=red!40,colbacktitle=red!40 , title=Theorem, fonttitle=\bfseries,  boxed title style={size=small,colframe=red!50} ]
+Let $a_{t^{*}}$ be the vector of opinions at period $t^{*}$ and $\tilde{G}$ a row stochastic hearing matrix with strictly positive diagonal entries. $(\lim_{t \rightarrow \infty} \tilde{G}^t)$ exists and  %\begin{itemize} 
+%\item[$(i)$] For all $t \geq t^{*}$, $\lim_{t \rightarrow \infty} \tilde{G}^t $ exists.
+ %\item[$(ii)$] 
+  $$\mathbf{a'}_{\infty} = (\lim_{t \rightarrow \infty} \tilde{G}^t) a_{t^{*}} = \mathcal{G} a_{t^{*}}$$ where $\mathcal{G} $ is the spectral projector associated with the eigenvalue $\lambda=1$.
+%\item[$(iii)$] The algebraic multiplicity of the eigenvalue  $\lambda=1$ is equal to the number of essential classes in $\tilde{G}$.
+ %\end{itemize}
+\end{tcolorbox}
+\hyperlink{prooftheorem}{\beamerbutton{Proof}}
+\pause
+\begin{itemize}
+\item[$\star$] Intuition?  expressers are like ``absorbing states'' (form an essential class, Seneta 1981).
+\item[$\star$] $(\lim_{t \rightarrow \infty} \tilde{G}_{\theta}^t )_{ij} = \mathcal{G}_{ij}$ is ``the probability that a random walk initiated at $i$ is absorbed by node $j$''.  
+%\item[$\star$] {\color{pink} ....the algebraic multiplicity of the eigenvalue  $\lambda=1$ is equal to the number of essential classes in $\tilde{G}$.}
+\end{itemize}
+\end{frame}
+%
+\begin{frame}[noframenumbering]{Spectral influence}
+
+\begin{itemize}
+\item[$\star$] <1-> Entries of $\mathcal{G}$? how much eventual weight in the final beliefs of the society that each expresser's initial belief has.  
+\item[$\star$]<2-> Total influence of an expresser given by the following statistic, which I call spectral influence: 
+\begin{equation*}
+s_i = \frac{1}{n} (\mathcal{G}' \mathbf{1} )_{i}
+\end{equation*}
+\item[$\star$]<3-> {\color{pink} For any consensual player $i \in C$, $s_i = 0$, while for $expressers$ $i \in E$, $s_i > 0$.}
+
+\end{itemize}
+\end{frame}
 \begin{frame}[noframenumbering, plain]
 \begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm}, colback=red!3,colframe=red!40,colbacktitle=red!40 ,fonttitle=\bfseries, boxed title style={size=small,colframe=red!50} ] 
 \centering Simulations

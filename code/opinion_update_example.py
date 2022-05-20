@@ -10,7 +10,8 @@ import json_lines
 import networkx as nx
 
 from matplotlib import pyplot as plt
-from utils import (save_figure)
+from utils import (save_figure,
+                    get_colors)
 
 def update_opinion_single_step(n, links, op, mu, tau):
 
@@ -38,24 +39,7 @@ def update_opinion_single_step(n, links, op, mu, tau):
 
     return vector_op
 
-def get_colors(val):
 
-    if val <= -0.69 and val > -1.1:
-        color = 'steelblue'
-    elif val <= -0.4 and val > -0.69:
-        color = 'skyblue'
-    elif val <= -0.1 and val > -0.4:
-        color = 'cyan'
-    elif val <= 0.1 and val > -0.1:
-        color = 'cornsilk'
-    elif val <= 0.4 and val > 0.1:
-        color = 'pink'
-    elif val <= 0.69 and val > 0.4:
-        color = 'lightcoral'
-    elif val <= 1.1 and val > 0.69:
-        color = 'brown'
-
-    return color
 
 def get_opinion_updated_expresser(n, op, links, N, mu, tau, name_plot):
 
@@ -135,6 +119,7 @@ def make_examples_circle(tau, mu):
 def main():
 
     make_examples_circle(tau = 0.5, mu = 0.2)
+
 
 if __name__ == '__main__':
 

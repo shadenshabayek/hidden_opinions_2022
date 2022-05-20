@@ -4,7 +4,9 @@ import pandas as pd
 import random as rd
 import matplotlib.pyplot as plt
 
-from utils import (save_figure)
+from collections import Counter
+from utils import (save_figure,
+                   update_opinions_two_types)
 
 def add_missing_links(df):
 
@@ -44,7 +46,7 @@ def generate_scale_free_network(n, m):
     df = add_missing_links(df)
     #print('len df after missing links', len(df))
     u = df.groupby(["source"])["target"].apply(list).reset_index(name='list_neighbors')
-    print(u)
+    #print(u)
     links = dict(zip(u.source, u.list_neighbors))
     #print(links)
     return G, links, n, m
@@ -88,27 +90,18 @@ def get_type(links, lim_centrality, centralities_dict):
         types_dict[player] = type
         types_array.append(type)
 
-    print(types_dict)
-
     return types_array, types_dict
 
 def generate_random_opinion_vector(n):
 
-    #types_array, types_dict = get_type(links, lim_centrality, centralities_dict)
-
     initial_opinions = [rd.uniform(-1,1) for _ in range(n)]
     return initial_opinions
 
-#def generate_graph_with_attribute():
-#def level_polarization():
-
 def plot_network (G, n, m):
-
-    #G, links, n, m = generate_scale_free_network(n, m)
 
     degree_sequence = sorted((d for n, d in G.degree()), reverse=True)
     fig = plt.figure("Degree of a random graph", figsize=(8, 8))
-    # Create a gridspec for adding subplots of different sizes
+
     axgrid = fig.add_gridspec(5, 4)
     ax0 = fig.add_subplot(axgrid[0:3, :])
     Gcc = G.subgraph(sorted(nx.connected_components(G), key=len, reverse=True)[0])
@@ -130,27 +123,66 @@ def plot_network (G, n, m):
     ax2.set_title("Degree histogram")
     ax2.set_xlabel("Degree")
     ax2.set_ylabel("Node Count")
+
     fig.tight_layout()
     save_figure('test_net.jpg')
     #plt.show()
 
-def main():
+def get_updated_opinions(n,m, N, tau, mu):
 
-    n = 30
-    m = 2
     G, links, n, m = generate_scale_free_network(n , m )
-    print(G.edges)
-    #lim_centrality = 0.5
     centralities_array, centralities_dict = get_local_centrality(links)
     lim_centrality = np.mean(centralities_array)
+    print('mean centrality set as lim', lim_centrality)
     types_array, types_dict = get_type(links, lim_centrality, centralities_dict)
     opinions = generate_random_opinion_vector(n)
-    plot_network (G, n, m)
+
+    matrix = np.zeros((n,N))
+    matrix[:,0] = opinions
+
+    for i in range(0,N-1):
+        op_vector = update_opinions_two_types(n, links, opinions, mu, tau, types_dict)
+        matrix[:,i+1] = op_vector
+
+    return links, types_array, types_dict, matrix, N
+
+def add_attributes(n,m, N, tau, mu, name_plot):
+
+    links, types_array, types_dict, matrix, N = get_updated_opinions(n,m, N, tau, mu)
+    G = nx.from_dict_of_lists(links)
+    op = matrix[:,N-1]
+
+    attributes_1 = {}
+
+    for node in G.nodes:
+        attributes_1[node] = op[node]
+
+    attributes_2 = {}
+
+    for node in G.nodes:
+        attributes_2[node] = types_array[node]
+
+    nx.set_node_attributes(G, attributes_1, name="opinion")
+    nx.set_node_attributes(G, attributes_2, name="type")
+
+    print('average op', np.mean(op))
+    print('max op', np.max(op))
+    print('var op', np.var(op))
+    print(Counter(types_dict.values()))
+    nx.write_gexf(G, './data/BA_{}.gexf'.format(name_plot))
+
+def main():
+
+    n = 200
+    m = 5
+    N = 200
+    tau = 0.5
+    mu = 0.2
+    
+    name_plot = 'test_1'
+    add_attributes(n,m, N, tau, mu, name_plot)
+
 
 if __name__ == '__main__':
 
-    #plot_network (n = 20, m = 2)
-    #links = {0: [1,6], 1: [0,2], 2: [1,3], 3: [2,4], 4: [3,5], 5: [4,6], 6: [5,0]}
-    #lim_centrality = 0.3
-    #get_type(links, lim_centrality)
     main()
