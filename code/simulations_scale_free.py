@@ -7,10 +7,13 @@ import matplotlib.pyplot as plt
 import networkx.algorithms.community as nx_comm
 
 from collections import Counter
+from matplotlib import cm
 from utils import (save_figure,
                    update_opinions_two_types,
                    save_list,
-                   read_list)
+                   read_list,
+                   save_data,
+                   import_data)
 
 def add_missing_links(df):
 
@@ -132,7 +135,7 @@ def get_updated_opinions(n,m, N, tau, mu, opinions, quantile):
     G, links, n, m = generate_scale_free_network(n , m )
     centralities_array, centralities_dict = get_local_centrality(links)
     lim_centrality = np.quantile(centralities_array, quantile)
-    print('mean centrality set as lim', lim_centrality)
+    #print('mean centrality set as lim', lim_centrality)
     types_array, types_dict = get_type(links, lim_centrality, centralities_dict)
 
     matrix = np.zeros((n,N))
@@ -159,15 +162,16 @@ def plot_hist_opinions(data):
         plt.setp(p, "facecolor", cm(c))
 
 
-def add_attributes(n,m, N, tau, mu, name_plot, opinions, quantile):
+def add_attributes(n,m, N, tau, mu, name_plot, opinions, quantile, write):
 
     links, types_array, types_dict, matrix, N = get_updated_opinions(n,m, N, tau, mu, opinions, quantile)
     G = nx.from_dict_of_lists(links)
-    #plot_network (G, n, m)
+
     op = matrix[:,N-1]
 
-    plot_hist_opinions(op)
-    save_figure('hist_opinions_{}'.format(name_plot))
+    #plot_network (G, n, m)
+    #plot_hist_opinions(op)
+    #save_figure('hist_opinions_{}'.format(name_plot))
 
     attributes_1 = {}
 
@@ -189,43 +193,97 @@ def add_attributes(n,m, N, tau, mu, name_plot, opinions, quantile):
 
     H = G.subgraph(set_expressers)
     n_H = nx.number_connected_components(H)
-    print('number connected components of expressers', n_H)
     assortativity_G = nx.degree_assortativity_coefficient(G)
-    print('degree assortativity of G', assortativity_G)
-    #modularity = nx_comm.modularity(G, list(G.nodes))
-    #print(modularity)
+    var = np.var(op)
+    count_hide = Counter(types_dict.values())['hide']
+    count_express = Counter(types_dict.values())['express']
 
-    print('average op', np.mean(op))
-    print('max op', np.max(op))
-    print('var op', np.var(op))
-    print(Counter(types_dict.values()))
-    nx.write_gexf(G, './data/BA_{}.gexf'.format(name_plot))
-    nx.write_gexf(H, './data/BA_{}_subgraph_expressers.gexf'.format(name_plot))
+    if write == 1:
+        nx.write_gexf(G, './data/BA_{}.gexf'.format(name_plot))
+        nx.write_gexf(H, './data/BA_{}_subgraph_expressers.gexf'.format(name_plot))
 
-    return G
+    return G, var, assortativity_G, n_H, count_express
 
-def run_simulations(opinions, n, name_plot, quantile):
+def run_simulations(opinions, m, n, name_plot, quantile, write):
 
-    m = 6
     N = 300
     tau = 0.45
     mu = 0.4
-    add_attributes(n, m, N, tau, mu, name_plot, opinions, quantile)
+
+    G, var, assortativity_G, n_H, count_express = add_attributes(n, m, N, tau, mu, name_plot, opinions, quantile, write)
+
+    return G, var, assortativity_G, n_H, count_express
 
 def main(new_opinion_vector):
 
     n = 600
+    write = 0
+
     if new_opinion_vector == 1:
         opinions = generate_random_opinion_vector(n)
         save_list(opinions, 'opinions_5.txt')
     else:
         opinions = read_list('opinions_5.txt')
 
+    #quantile = 0.8
+    #m = 6
+    df = pd.DataFrame(columns=['hubs',
+                               'quantile',
+                               'variance',
+                               'assortativity',
+                               'subgraph_comp_exp',
+                               'count_expressers'])
+    for m in range(1,10):
+        print('hub', m)
+        for quantile in np.arange(0.0, 1.0, 0.1):
+            print('quantile', quantile)
+            name_plot = 'run_{}_quantile_{}'.format(m, quantile)
+            G, var, assortativity_G, n_H, count_express = run_simulations(opinions, m, n, name_plot, quantile, write)
+            df = df.append({'hubs': m,
+                           'quantile': quantile,
+                           'variance': var,
+                           'assortativity': assortativity_G,
+                           'subgraph_comp_exp': n_H,
+                           'count_expressers': count_express}, ignore_index=True)
 
-    quantile = 0.8
-    name_plot = 'run_8_nodes_08_quantile_{}'.format(n)
-    run_simulations(opinions, n, name_plot, quantile)
+    save_data(df, 'simul_2022_05_20.csv')
+
+def plot_heatmap(fig_title, var1, var2, x_label, y_label):
+
+    df = import_data('simul_2022_05_20.csv')
+    gridsize=30
+    plt.subplot(111)
+
+    plt.hexbin(df[var1], df[var2], C=df['variance'], gridsize=gridsize, cmap=cm.jet, bins=None)
+    plt.axis([df[var1].min(), df[var1].max(), df[var2].min(), df[var2].max()])
+    plt.xlabel('{}'.format(x_label))
+    plt.ylabel('{}'.format(y_label))
+    cb = plt.colorbar()
+    cb.set_label('variance in long run opinions')
+    save_figure('heatmap_{}_{}'.format(var1,var2))
+
+def plot_all_maps():
+
+    plot_heatmap(fig_title = 'heatmap_hubs_quantile',
+                var1 = 'quantile',
+                var2 = 'hubs',
+                x_label = 'quantile of local centrality = threshold',
+                y_label = 'number of initial hubs')
+
+    plot_heatmap(fig_title = 'heatmap_subgraphs_quantile',
+                var1 = 'quantile',
+                var2 = 'subgraph_comp_exp',
+                x_label = 'quantile of local centrality = threshold',
+                y_label = 'nb components subgraph expressers')
+
+    plot_heatmap(fig_title = 'heatmap_assortativity_quantile',
+                var1 = 'quantile',
+                var2 = 'assortativity',
+                x_label = 'quantile of local centrality = threshold',
+                y_label = 'degree assortativity')
+
 
 if __name__ == '__main__':
 
-    main(new_opinion_vector = 0)
+    #main(new_opinion_vector = 0)
+    plot_all_maps()

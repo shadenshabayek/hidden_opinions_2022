@@ -85,3 +85,17 @@ def read_list(file_name):
         b = pickle.load(fp)
 
     return b
+
+def save_data(df, file_name):
+
+    file_path = os.path.join('.', 'data', file_name)
+
+    df.to_csv(file_path, mode='a', header=False, index=False)
+
+    print(' {} is saved.'.format(file_name))
+
+def import_data(file_name):
+
+    data_path = os.path.join('.', 'data', file_name)
+    df = pd.read_csv(data_path, low_memory=False)
+    return df
