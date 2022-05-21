@@ -1,7 +1,6 @@
 .env
 .minetrc
 
-*.csv
 *.json
 *.jsonl
 *.tex
@@ -23,6 +22,7 @@ __pycache__
 *.out
 *.blg
 *.bbl
+*.gexf
 
 *.mod
 !article/presentation/HO_shaden_2022.tex
