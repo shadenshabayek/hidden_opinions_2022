@@ -59,8 +59,15 @@ def get_local_centrality(links):
     centralities_dict = {}
     centralities_array = []
 
+    degrees_dict = {}
+    degrees_array = []
+
     for player in links.keys():
         d = len(links[player])
+
+        degrees_array.append(d)
+        degrees_dict[player] = d
+        
         sum_d = []
 
         for i in links[player]:
@@ -132,7 +139,7 @@ def plot_network (G, n, m):
 
 def get_updated_opinions(n,m, N, tau, mu, opinions, quantile):
 
-    G, links, n, m = generate_scale_free_network(n , m )
+    G, links, n, m = generate_scale_free_network(n , m)
     centralities_array, centralities_dict = get_local_centrality(links)
     lim_centrality = np.quantile(centralities_array, quantile)
     #print('mean centrality set as lim', lim_centrality)
@@ -152,7 +159,7 @@ def plot_hist_opinions(data):
     cm = plt.cm.get_cmap("bwr")
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
-    _, bins, patches = ax.hist(data,color="r",bins=20)
+    _, bins, patches = ax.hist(data, color="r",bins=20)
     bin_centers = 0.5*(bins[:-1]+bins[1:])
     col = bin_centers - min(bin_centers)
     col /= max(col)

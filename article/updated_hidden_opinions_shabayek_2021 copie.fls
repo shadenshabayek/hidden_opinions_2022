@@ -1,0 +1,6 @@
+PWD /Users/shadenshabayek/Documents/General/Admin/hidden_opinions_2022/article
+INPUT /usr/local/texlive/2020/texmf.cnf
+INPUT /usr/local/texlive/2020/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT updated_hidden_opinions_shabayek_2021 copie.tex
+OUTPUT updated_hidden_opinions_shabayek_2021 copie.log
